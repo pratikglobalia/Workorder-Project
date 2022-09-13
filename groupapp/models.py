@@ -44,7 +44,7 @@ class WorkOrder(models.Model):
     
     
 class Comments(models.Model):
-    task = models.ForeignKey(WorkOrder, on_delete=models.CASCADE)
+    task = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, related_name='task')
     comment_by = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
     comment_at = models.DateTimeField(auto_now_add=True)

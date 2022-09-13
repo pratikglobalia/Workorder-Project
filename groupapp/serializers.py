@@ -24,16 +24,17 @@ class CommentsSerializer(serializers.ModelSerializer):
 
     
 class WorkOrderSerializer(serializers.ModelSerializer):
-    comment = serializers.SerializerMethodField()
+    # task = serializers.SerializerMethodField()
+    task = CommentsSerializer(many=True)
     assigned_user = serializers.StringRelatedField()
     assigned_by = serializers.StringRelatedField()
-    def get_comment(self, obj):
-        comment = Comments.objects.filter(task=obj)
-        return CommentsSerializer(comment, many=True).data
+    # def get_comment(self, obj):
+    #     comment = Comments.objects.filter(task=obj)
+    #     return CommentsSerializer(comment, many=True).data
     
     class Meta:
         model = WorkOrder
-        fields = ['task_name', 'task_desc', 'priority', 'status', 'assigned_user', 'assigned_by', 'comment']
+        fields = ['task_name', 'task_desc', 'priority', 'status', 'assigned_user', 'assigned_by', 'task']
         
         
 class OwnerSerializer(serializers.ModelSerializer):
